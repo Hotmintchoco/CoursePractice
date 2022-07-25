@@ -65,7 +65,7 @@
 	</div>
 	
 	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		/* var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		   mapOption = { 
 		   center: new kakao.maps.LatLng(37.267262, 127.017478), // 지도의 중심좌표
 		   level: 4 // 지도의 확대 레벨
@@ -86,7 +86,98 @@
 		// 마커가 지도 위에 표시되도록 설정합니다
 		marker.setMap(map); 
 		
-		marker.setDraggable(true);
+		marker.setDraggable(true); */
+		
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		var distanceOverlay;
+		var dots = {};
+
+		// 마커를 표시할 위치와 title 객체 배열입니다 
+		var positions = [
+		    {
+		        title: '카카오', 
+		        latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+		    },
+		    {
+		        title: '생태연못', 
+		        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+		    },
+		    {
+		        title: '텃밭', 
+		        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+		    },
+		    {
+		        title: '근린공원',
+		        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+		    }
+		];
+
+		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+	    
+		for (var i = 0; i < positions.length; i ++) {
+		    
+		    // 마커 이미지의 이미지 크기 입니다
+		    var imageSize = new kakao.maps.Size(24, 35); 
+		    
+		    // 마커 이미지를 생성합니다    
+		    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+		    
+		    // 마커를 생성합니다
+		    var marker = new kakao.maps.Marker({
+		        map: map, // 마커를 표시할 지도
+		        position: positions[i].latlng, // 마커를 표시할 위치
+		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+		        image : markerImage // 마커 이미지 
+		    });
+		}
+
+		var linePath;
+		var lineLine = new kakao.maps.Polyline();
+		var distance;
+
+		for (var i = 0; i < positions.length; i++) {
+			if (i != 0) {
+				linePath = [ positions[i - 1].latlng, positions[i].latlng ]
+			}
+			;
+			lineLine.setPath(linePath);
+
+			var drawLine = new kakao.maps.Polyline({
+				map : map,
+				path : linePath,
+				strokeWeight: 3, // 선의 두께입니다 
+            	strokeColor: '#db4040', // 선의 색깔입니다
+            	strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+            	strokeStyle: 'solid' // 선의 스타일입니다
+			});
+			
+
+			distance = Math.round(lineLine.getLength());
+			displayCircleDot(positions[i].latlng, distance);
+		}
+		
+		function displayCircleDot(position, distance) {
+			if (distance > 0) {
+				// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+				var distanceOverlay = new kakao.maps.CustomOverlay(
+						{
+							content : '<div class="dotOverlay">거리 <span class="number">'
+									+ distance + '</span>m</div>',
+							position : position,
+							yAnchor : 1,
+							zIndex : 2
+						});
+
+				// 지도에 표시합니다
+				distanceOverlay.setMap(map);
+			}
+		}
 	</script>   
     
 <jsp:include page="../includes/footer.jsp"></jsp:include>

@@ -14,7 +14,7 @@ CREATE TABLE users (
    joindate date default sysdate,
    email varchar2(50) NOT NULL,
    admin number(1) NOT NULL,
-   qestion varchar2(50) NULL,
+   question varchar2(50) NULL,
    answer varchar2(30) NULL
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE festival (
    festival_image varchar2(4000) NULL,
    festival_schedule varchar2(30) NULL,
    festival_city varchar2(10) not null,
-   --fk Ãß°¡
+   --fk ï¿½ß°ï¿½
    usernum number not null,
    CONSTRAINT fk_user_to_festival foreign key(usernum) references users(usernum)
 );
@@ -38,7 +38,7 @@ CREATE TABLE board (
    hits number NOT NULL,
    board_image varchar2(4000) NULL,
    board_like number not null,
-   --fk Ãß°¡
+   --fk ï¿½ß°ï¿½
    usernum number not null,
    CONSTRAINT fk_user_to_board foreign key(usernum) references users(usernum)
 );
@@ -47,7 +47,7 @@ CREATE TABLE board_comment (
    board_comm_num number NOT NULL primary key,
    board_comm_date date default sysdate,
    board_comm_reply varchar2(1000) NOT NULL,
-   --fk Ãß°¡
+   --fk ï¿½ß°ï¿½
    board_num number not null,
    CONSTRAINT fk_board_to_comment foreign key(board_num) references board(board_num)
 );
@@ -58,7 +58,7 @@ create table destination (
     destination_date date default sysdate,
     destination_image varchar2(4000),
     destination_content varchar2(4000) not null,
-    --fk Ãß°¡
+    --fk ï¿½ß°ï¿½
     usernum number not null,
     CONSTRAINT fk_user_to_destination foreign key(usernum) references users(usernum)
 );
@@ -67,7 +67,7 @@ create table des_comment (
     des_comm_num number not null,
     des_comm_date date default sysdate,
     des_comm_reply varchar2(1000),
-    --fk Ãß°¡
+    --fk ï¿½ß°ï¿½
     destination_num number not null,
     CONSTRAINT fk_destination_to_des_comment foreign key(destination_num) references destination(destination_num)
 );
@@ -80,30 +80,30 @@ CREATE TABLE course (
    course_image varchar2(4000) NULL,
    course_like number NOT NULL,
    course_city varchar2(10) not null,
-   --fk Ãß°¡
+   --fk ï¿½ß°ï¿½
    destination_num number not null,
     CONSTRAINT fk_destination_to_course foreign key(destination_num) references destination(destination_num)
 );
 
--- È¸¿ø¸ñ·Ï ½ÃÄö½º
+-- È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence users_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
--- ÃàÁ¦ ½ÃÄö½º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence festival_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
--- º¸µå ½ÃÄö½º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence board_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
--- º¸µå ´ñ±Û ½ÃÄö½º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence board_comment_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
--- ¿©ÇàÁö ½ÃÄö½º
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence destination_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
--- ¿©ÇàÁö ´ñ±Û ½ÃÄö½º
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence des_comment_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
--- ÄÚ½º ½ÃÄö½º
+-- ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 create sequence course_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
 
