@@ -1,5 +1,7 @@
 package com.trip.controller.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.trip.domain.UserVO;
 import com.trip.mapper.UserMapper;
+import com.trip.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -19,10 +22,10 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @RequestMapping("/users/*")
 public class UserController {
-	private UserMapper mapper;
+	private UserService serivce;
 	
 	@GetMapping("login.do")
-	public String loginView(Model model) {
+	public String loginView() {
 		log.info("-------login Page---------");
 		return "users/login";
 	}
@@ -30,7 +33,7 @@ public class UserController {
 	@PostMapping("login.do")
 	public String login(Model model, UserVO vo, HttpSession session) {
 		log.info("-------login 실행---------");
-		UserVO user = mapper.read(vo);
+		UserVO user = serivce.login(vo);
 		log.info(user);
 		if (user != null) {
 			session.setAttribute("user", user);
@@ -47,7 +50,7 @@ public class UserController {
 	}
 	
 	@PostMapping("join.do")
-	public String join(Model model, UserVO vo) {
+	public String join(UserVO vo) {
 		log.info("-------join---------");
 		log.info(vo.getUserName());
 		String birth = vo.getBirth();
@@ -60,28 +63,54 @@ public class UserController {
 			vo.setBirth(birth);
 		}
 		vo.setBirth(birth);
-		mapper.insert(vo);
+		serivce.register(vo);
 		log.info("-------- user insert ------------");
 		return "redirect:/users/login.do";
 	}
 	
-	@GetMapping("idFind.do")
-	public String idFindView(Model model) {
+	@RequestMapping("idFind.do")
+	public String idFindView() {
 		log.info("-------idFind Page---------");
 		return "users/idFind";
 	}
 	
-	@GetMapping("pwFind.do")
-	public String pwFindView(Model model) {
+	@GetMapping("idFindList.do")
+	public String idFind(Model model, UserVO vo) {
+		log.info("------- idFind ---------");
+		List<UserVO> list = serivce.idList(vo);
+		log.info(list.isEmpty());
+		
+		model.addAttribute("list", list);
+		
+		if(list.isEmpty() == true) {
+			model.addAttribute("list", null);
+		}
+		return "users/userIncludes/idFindList";
+	}
+	
+	@RequestMapping("pwFind.do")
+	public String pwFindView() {
 		log.info("-------pwFind Page---------");
 		return "users/pwFind";
+	}
+	
+	@RequestMapping("passwordFind.do")
+	public String pwFind(Model model, UserVO vo) {
+		log.info("------- passwordFind ---------");
+		UserVO user = serivce.findPassword(vo);
+		UserVO rightId = serivce.getId(vo);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("id", rightId);
+		
+		return "users/userIncludes/findPassword";
 	}
 	
 	
 	@RequestMapping("list.do")
 	public void list(Model model) {
 		log.info("list");
-		model.addAttribute("list", mapper.getList());
+		model.addAttribute("list", serivce.getUserList());
 	}
 	
 	@RequestMapping("mypage.do")
@@ -92,9 +121,8 @@ public class UserController {
 	
 	@GetMapping("withdraw.do")
 	public String withdraw(UserVO vo, HttpSession session) {
-		log.info("------ remove ------");
 		log.info(vo.getUserNum());
-		mapper.delete(vo.getUserNum());
+		serivce.remove(vo.getUserNum());
 		session.invalidate();
 		return "redirect:/home.do";
 	}
@@ -106,11 +134,10 @@ public class UserController {
 	
 	@PostMapping("modify.do")
 	public String modify(UserVO vo, HttpSession session) {
-		log.info("------ modify ------");
 		log.info(vo);
-		mapper.update(vo);
+		serivce.modify(vo);
 		
-		UserVO user = mapper.get(vo.getUserNum());
+		UserVO user = serivce.get(vo.getUserNum());
 		session.setAttribute("user", user);
 		return "users/mypage";
 	}

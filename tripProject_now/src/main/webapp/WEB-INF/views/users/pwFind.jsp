@@ -31,7 +31,7 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="js/login.find.join.js"></script>
+<script type="text/javascript" src="../js/login.find.join.js"></script>
 <style type="text/css">
 @font-face {
 	font-family: 'yg-jalnan';
@@ -134,12 +134,12 @@ h2 {
 	margin-bottom: 50px;
 }
 
-.find_email, .find_phone {
+.find_question, .find_answer {
 	margin-top: 50px;
 	width: 80%;
 }
 
-.find_id input, .find_email input, .find_phone input {
+.find_id input, .find_question input, .find_answer input {
 	width: 100%;
 	height: 50px;
 	border-radius: 30px;
@@ -149,7 +149,7 @@ h2 {
 	outline: none;
 }
 
-.find_id, .find_email, .find_phone {
+.find_id, .find_question, .find_answer {
 	margin-top: 20px;
 	width: 80%;
 }
@@ -174,6 +174,43 @@ h2 {
 	text-align: center;
 	margin-top: 20px;
 }
+
+select {
+   width: 85px;
+   height: 25px;
+   outline: none;
+   background: #f5f6f7;
+   border: 1px solid #999;
+}
+
+#checkquestion {
+   width: 200px;
+   height: 40px;
+   border: 1px solid #dadada;
+   outline: none;
+   float: left;
+   background-color: white;
+   border-radius: 15px;
+}
+
+#signup-answer {
+   width: 100%;
+   height: 25px;
+   border: none;
+   outline: none;
+}
+
+.signup-input {
+   display: flex;
+   padding: 5px;
+   border: solid 1px #dadada;
+   background: #fff;
+   cursor: pointer;
+   border-radius: 15px;
+}
+
+.find_email
+
 </style>
 </head>
 <body>
@@ -184,18 +221,28 @@ h2 {
 	<br>
 	<br>
 	
-	<form method="post" action="home.jsp" name="findpwfrm">
+	<form method="post" action="pwFind.do" name="frm">
 		<div class="Wallpapers">
 			<div class="find">
 				<h2 class="title">비밀번호 찾기</h2>
 				<div class="find_id">
-					<input type="text" name="pwfindid" id="" placeholder="이름">
+					<input type="text" name="userId" placeholder="아이디">
 				</div>
-				<div class="find_email">
-					<input type="text" name="pwfindemail" id="" placeholder="이메일">
+				<div class="find_question">
+					 <span class="choice">
+                  <h4>&nbsp;본인 확인 질문</h4> <select id="checkquestion"
+                  class="selectbox" name="question">
+	                     <option value="select">&nbsp;질문을 선택하세요.</option>
+	                     <option value="초등학교">&nbsp;초등학교 이름은?</option>
+	                     <option value="중학교">&nbsp;중학교 이름은?</option>
+	                     <option value="고등학교">&nbsp;고등학교 이름은?</option>
+	                     <option value="첫 휴대전화">&nbsp;처음 산 휴대전화 기종은?</option>
+	                     <option value="첫 자동차">&nbsp;처음 산 자동차 기종은?</option>
+	                     <option value="다시 태어난다면">&nbsp;다시 태어난다면?</option>
+	               </select>
 				</div>
-				<div class="find_phone">
-					<input type="text" name="pwfindphone" id="" placeholder="핸드폰번호">
+				<div class="find_answer">
+					<input type="text" name="answer" placeholder="답변">
 				</div>
 				<div class="submit">
 					<input type="submit" value="비밀번호 찾기" onclick="return pwfindCheck()">
