@@ -47,17 +47,33 @@
 	<i class="fa-solid fa-circle-arrow-up"></i></a>
 	
 	<!-- header card -->
-	
-	<div class="card">
-   
+
+	<div class="card"></div>
+	<br>
+	<br>
+	<div id="slider">
+		<div class="card" style="width: 25rem;">
+		<a href="page.do">
+			<img src="../img/pet.jpg" class="card-img-top" alt="...">
+		</a>
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">An item</li>
+				<li class="list-group-item">A second item</li>
+				<li class="list-group-item">A third item</li>
+			</ul>
+			<div class="card-body">
+				<a href="page.do" class="card-link">Card link</a> <a href="#"
+					class="card-link">Another link</a>
+			</div>
+		</div>
+
 	</div>
-	<br><br>
-<div id="slider">
-         <!-- 여기에 내용 넣으세요 -->
-        
-        
-    </div>
-    
-<jsp:include page="../includes/footer.jsp"></jsp:include>
+
+	<jsp:include page="../includes/footer.jsp"></jsp:include>
 </body>
 </html>

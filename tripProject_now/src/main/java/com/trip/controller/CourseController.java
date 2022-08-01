@@ -16,8 +16,15 @@ import lombok.extern.log4j.Log4j;
 public class CourseController {
 	private UserMapper mapper;
 	
-	@RequestMapping("page.do")
+	@RequestMapping("list.do")
 	public String list(Model model) {
+		log.info("------- courseList -------");
+		return "course/courseList";
+	}
+	
+	@RequestMapping("page.do")
+	public String page(Model model) {
+		log.info("------- coursePage -------");
 		return "course/coursePage";
 	}
 	
