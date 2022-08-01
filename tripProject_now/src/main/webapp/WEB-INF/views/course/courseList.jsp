@@ -35,8 +35,118 @@
   padding-left: 15px;
   padding-right: 15px;
 }
- ul > li > a {color: #212121;}
+ul > li > a {color: #212121;}
  #slider {width: 1000px; height: 1000px; margin: 0 auto;}
+ 
+ 
+:root {
+  --black: #1a1a1a;
+  --white: #fff;
+  --gray: #ccc;
+  --darkgreen: #18846C;
+  --lightbrown: antiquewhite;
+  --minRangeValue: 280px;
+}
+
+* {
+  margin: 0;
+  padding: 0;  
+  outline: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+}
+
+img {
+  display: block;
+  width: 290px;
+  height: 193px;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin:0;
+  padding:0;
+}
+
+a {
+  color: inherit;
+}
+
+body {
+  margin: 50px 0;
+  color: var(--black);
+  font: 1rem/1.3 sans-serif;
+}
+
+.gallery {
+  padding: 0 2rem;
+}
+
+.container {
+  max-width: 1030px;
+  margin: 0 auto;
+}
+
+.d-none {
+  display: none;
+}
+.image-list {
+  margin: 3rem 0;
+}
+
+.image-list li {
+  color: var(--darkblack);
+}
+
+.grid-view {
+  display: grid;
+  grid-gap: 80px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--minRangeValue), 1fr));
+}
+
+li div p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 290px;
+  height: 20px;
+  color: black;
+  font-size: 13pt;
+}
+#child{
+color:grey;
+font-size: 11pt;
+}
+.box_rightType{width:950px; height:50px; border:1px solid #e6e6e6; background-color:#f7f7f7; line-height: 50px;border-radius: 2em;}
+
+.box_rightType ul li {
+    margin: 0 20px 10px 10px;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+    font-size: 13pt;
+}
+.box_rightType ul li button{outline: 0;}
+
+#writebtn {
+  background-color: #e7e7e7;
+  border: none;
+  padding: 13px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  float: right;
+  outline: 0;
+}
+.card {float: left; margin: 20px 30px 0 20px; width: 19.1em;}
      
 </style>
      
@@ -52,7 +162,62 @@
 	<br>
 	<br>
 	<div id="slider">
-		<div class="card" style="width: 25rem;">
+	
+		<div class="box_rightType">
+			<ul>
+				<li style="margin-left: 25px"><button>서울시</button></li>
+				<li><button>경기도</button></li>
+				<li><button>강원도</button></li>
+				<li><button>충청북도</button></li>
+				<li><button>충청남도</button></li>
+				<li><button>경상북도</button></li>
+				<li><button>경상남도</button></li>
+				<li><button>전라북도</button></li>
+				<li><button>전라남도</button></li>
+				<li><button>제주도</button></li>
+			</ul>
+		</div>
+		<br>
+		
+		<div class="card">
+		<a href="page.do">
+			<img src="../img/pet.jpg" class="card-img-top" alt="...">
+		</a>
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">An item</li>
+				<li class="list-group-item">A second item</li>
+				<li class="list-group-item">A third item</li>
+			</ul>
+			<div class="card-body">
+				<a href="page.do" class="card-link">Card link</a> <a href="#"
+					class="card-link">Another link</a>
+			</div>
+		</div>
+		<div class="card">
+		<a href="page.do">
+			<img src="../img/pet.jpg" class="card-img-top" alt="...">
+		</a>
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the
+					card title and make up the bulk of the card's content.</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">An item</li>
+				<li class="list-group-item">A second item</li>
+				<li class="list-group-item">A third item</li>
+			</ul>
+			<div class="card-body">
+				<a href="page.do" class="card-link">Card link</a> <a href="#"
+					class="card-link">Another link</a>
+			</div>
+		</div>
+		<div class="card">
 		<a href="page.do">
 			<img src="../img/pet.jpg" class="card-img-top" alt="...">
 		</a>
@@ -73,7 +238,5 @@
 		</div>
 
 	</div>
-
-	<jsp:include page="../includes/footer.jsp"></jsp:include>
 </body>
 </html>
