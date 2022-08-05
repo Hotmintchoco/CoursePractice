@@ -11,14 +11,14 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.trip.app">
+	<logger name="com.trip.controller">
 		<level value="info" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
-	</logger>	
+	</logger>
 	
 	<logger name="org.springframework.beans">
 		<level value="info" />
@@ -34,8 +34,15 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="info" />
+		<priority value="warn" />
 		<appender-ref ref="console" />
 	</root>
+	
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 	
 </log4j:configuration>

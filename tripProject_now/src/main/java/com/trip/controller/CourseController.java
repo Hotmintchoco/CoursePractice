@@ -3,8 +3,13 @@ package com.trip.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.trip.domain.CourseVO;
@@ -68,7 +73,25 @@ public class CourseController {
 		log.info(vo);
 		
 		model.addAttribute("course", vo);
+		model.addAttribute("desList", vo.getDesList());
 		return "course/coursePage";
+	}
+	
+	@GetMapping(value = "/page/{num}",
+			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<DesDataDTO>> desList(@PathVariable("num") int num) {
+		log.info("getList.........." + num);
+		
+		List<DesAndCourseVO> desNumList = courseMapper.getDesList(num);
+		List<DesDataDTO> desList = new ArrayList<DesDataDTO>(); //여행지 리스트를 desList에 담는다.(코스VO의 desList에 담기위해 생성)
+		for(DesAndCourseVO destinations : desNumList) {
+			log.info(destinations);
+			Long long1 = (long) destinations.getDestinationNum();
+			DesDataDTO dto = desMapper.read(long1);
+			desList.add(dto);
+		}
+		
+		return new ResponseEntity<>(desList, HttpStatus.OK);
 	}
 	
 }

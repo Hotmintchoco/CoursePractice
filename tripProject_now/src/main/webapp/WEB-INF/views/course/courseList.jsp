@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>코스추천</title>
-    <link rel="stylesheet" href="../fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
-    <link rel="stylesheet" href="../css/magnific-popup.css"> 
-     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="/resources/fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/resources/css/magnific-popup.css"> 
+     <link rel="stylesheet" href="/resources/css/nav.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="/resources/css/animate.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -68,9 +68,7 @@ ul {
   margin:0;
   padding:0;
 }
-a {
-  color: inherit;
-}
+a div p, a div h5{text-decoration: none; color: black;}
 body {
   margin: 50px 0;
   color: var(--black);
@@ -168,28 +166,24 @@ font-size: 11pt;
 		
 		<div class="card">
 		<a class='move' href="page.do?num=<c:out value="${course.courseNum}"/>">
-			<img src="../img/pet.jpg" class="card-img-top" alt="...">
-		</a>
+			<img src="<c:out value="${course.desList.get(0).firstImg}"/>" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title">${course.courseTitle}</h5>
 				<p class="card-text">${course.courseContent}</p>
 				<p class="card-text">${course.courseCity}</p>
 			</div>
+		</a>
 			<ul class="list-group list-group-flush">
 			<c:forEach items="${course.desList}" var="destination">
 				<li class="list-group-item">* ${destination.title}</li>
 			</c:forEach>
 			</ul>
-			<div class="card-body">
-				<a href="page.do" class="card-link">Card link</a> <a href="#"
-					class="card-link">Another link</a>
-			</div>
 		</div>
 		
 		</c:forEach>
 		<div class="card">
 		<a href="page.do">
-			<img src="../img/pet.jpg" class="card-img-top" alt="...">
+			<img src="/resources/img/pet.jpg" class="card-img-top" alt="...">
 		</a>
 			<div class="card-body">
 				<h5 class="card-title">Card title</h5>
@@ -208,7 +202,7 @@ font-size: 11pt;
 		</div>
 		<div class="card">
 		<a href="page.do">
-			<img src="../img/pet.jpg" class="card-img-top" alt="...">
+			<img src="/resources/img/pet.jpg" class="card-img-top" alt="...">
 		</a>
 			<div class="card-body">
 				<h5 class="card-title">Card title</h5>
@@ -237,8 +231,6 @@ $(document).ready(function(){
 	checkModal(result);
 	
 	// 뒤로가기시 modal화면 뜨는 문제 해결
-	history.replaceState({}, null, null);
-	
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		console.log("test------------------")
