@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +77,7 @@
 	     	<p>${course.courseCity}</p>
 	     	<button type="button" class="btn_good">
 	     		<span class="ico"></span>
-	     		<span class="num" id="numLike">${course.courseLike}</span>
+	     		<span class="numLike" id="numLike">${course.courseLike}</span>
 	     	</button>
 	     	<hr>
 	     </div>
@@ -85,6 +86,8 @@
 	     <div id="map" style="width:500px;height:400px; margin: 0 auto;"></div>
 	     <p>총 거리</p><span id="i_result"></span>
 	     <input id="num" type="hidden" value="${course.courseNum}">
+	     <input id="resultMapX" type="hidden" value="${resultMapX}">
+	     <input id="resultMapY" type="hidden" value="${resultMapY}">
 	<hr>
 		
 	</div>
@@ -92,6 +95,8 @@
 	<script>
 	
 	var num = document.getElementById('num').value;
+	var resultMapX = document.getElementById('resultMapX').value;
+	var resultMapY = document.getElementById('resultMapY').value;
 	
 	var courseService = (function() {
 		
@@ -121,14 +126,13 @@
 			console.log(list[i]);
 		}
 		courseList = list;
-	console.log(courseList);
+		console.log(courseList);
 	
-		
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    mapOption = { 
-	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: mLevel // 지도의 확대 레벨
+	        center: new kakao.maps.LatLng(resultMapY, resultMapX), // 지도의 중심좌표
+	        level: 5 // 지도의 확대 레벨
 	    };
 
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -203,20 +207,18 @@
 			totalDistance = totalDistance + distance; 
 			displayCircleDot(new kakao.maps.LatLng(courseList[i].mapY, courseList[i].mapX), distance);
 		}
-		
-		var mLevel = 5;
 		if(7500< totalDistance && totalDistance < 12500) {
-			mLevel = 6;
+		 	map.setLevel(6);
 		} else if(12500<= totalDistance && totalDistance < 20000){
-			mLevel = 7;
+			map.setLevel(7);
 		} else if(20000<= totalDistance && totalDistance < 30000){
-			mLevel = 8;
+			map.setLevel(8);
 		} else if(30000<= totalDistance && totalDistance < 40000){
-			mLevel = 9;
+			map.setLevel(9);
 		} else if(40000<= totalDistance && totalDistance < 80000){
-			mLevel = 10;
-		} else {
-			mLevel = 11;
+			map.setLevel(10);
+		} else if(80000<= totalDistance){
+			map.setLevel(11);
 		}
 		
 	    

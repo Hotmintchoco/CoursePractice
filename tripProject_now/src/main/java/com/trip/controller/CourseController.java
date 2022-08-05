@@ -1,4 +1,4 @@
-package com.trip.controller;
+  package com.trip.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +59,9 @@ public class CourseController {
 	public String page(Model model, int num) {
 		log.info("------- coursePage -------");
 		
+		double numMapX = 0;
+		double numMapY = 0;
+		
 		CourseVO vo = courseMapper.readCourse(num);
 		
 		List<DesAndCourseVO> desNumList = courseMapper.getDesList(num);
@@ -68,12 +71,21 @@ public class CourseController {
 			Long long1 = (long) destinations.getDestinationNum();
 			DesDataDTO dto = desMapper.read(long1);
 			desList.add(dto);
+			
+			numMapX += Double.parseDouble(dto.getMapX());
+			numMapY += Double.parseDouble(dto.getMapY());
 		}
 		vo.setDesList(desList);
 		log.info(vo);
 		
+		String resultMapX = String.format("%.6f", numMapX/desNumList.size());
+		String resultMapY = String.format("%.6f", numMapY/desNumList.size());
+		log.info(resultMapX);
+		log.info(resultMapY);
+		
 		model.addAttribute("course", vo);
-		model.addAttribute("desList", vo.getDesList());
+		model.addAttribute("resultMapX", resultMapX);
+		model.addAttribute("resultMapY", resultMapY);
 		return "course/coursePage";
 	}
 	
