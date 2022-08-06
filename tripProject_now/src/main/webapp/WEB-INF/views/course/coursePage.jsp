@@ -83,7 +83,7 @@
 	     </div>
 	     
 	        
-	     <div id="map" style="width:500px;height:400px; margin: 0 auto;"></div>
+	     <div id="map" style="width:900px;height:500px; margin: 0 auto;"></div>
 	     <p>총 거리</p><span id="i_result"></span>
 	     <input id="num" type="hidden" value="${course.courseNum}">
 	     <input id="resultMapX" type="hidden" value="${resultMapX}">
@@ -132,7 +132,7 @@
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(resultMapY, resultMapX), // 지도의 중심좌표
-	        level: 5 // 지도의 확대 레벨
+	        level: 4 // 지도의 확대 레벨
 	    };
 
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -200,17 +200,17 @@
 			displayCircleDot(new kakao.maps.LatLng(courseList[i].mapY, courseList[i].mapX), distance);
 		}
 		if(7500< totalDistance && totalDistance < 12500) {
-		 	map.setLevel(6);
+		 	map.setLevel(5);
 		} else if(12500<= totalDistance && totalDistance < 20000){
-			map.setLevel(7);
+			map.setLevel(6);
 		} else if(20000<= totalDistance && totalDistance < 30000){
-			map.setLevel(8);
+			map.setLevel(7);
 		} else if(30000<= totalDistance && totalDistance < 40000){
-			map.setLevel(9);
+			map.setLevel(8);
 		} else if(40000<= totalDistance && totalDistance < 80000){
-			map.setLevel(10);
+			map.setLevel(9);
 		} else if(80000<= totalDistance){
-			map.setLevel(11);
+			map.setLevel(10);
 		}
 		
 	    
