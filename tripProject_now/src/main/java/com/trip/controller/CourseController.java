@@ -67,7 +67,6 @@ public class CourseController {
 		List<DesAndCourseVO> desNumList = courseMapper.getDesList(num);
 		List<DesDataDTO> desList = new ArrayList<DesDataDTO>(); //여행지 리스트를 desList에 담는다.(코스VO의 desList에 담기위해 생성)
 		for(DesAndCourseVO destinations : desNumList) {
-			log.info(destinations);
 			Long long1 = (long) destinations.getDestinationNum();
 			DesDataDTO dto = desMapper.read(long1);
 			desList.add(dto);
@@ -80,8 +79,6 @@ public class CourseController {
 		
 		String resultMapX = String.format("%.6f", numMapX/desNumList.size());
 		String resultMapY = String.format("%.6f", numMapY/desNumList.size());
-		log.info(resultMapX);
-		log.info(resultMapY);
 		
 		model.addAttribute("course", vo);
 		model.addAttribute("resultMapX", resultMapX);

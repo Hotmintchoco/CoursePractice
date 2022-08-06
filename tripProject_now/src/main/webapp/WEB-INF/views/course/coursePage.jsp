@@ -138,14 +138,6 @@
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		var distanceOverlay;
 		var dots = {};
-
-		// 마커를 표시할 위치와 title 객체 배열입니다 
-		var positions = [
-			   {
-			       title: '카카오', 
-			       latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-			   },
-		];
 	    
 		for (var i=0; i<courseList.length; i++) {
 			var latlng = new kakao.maps.LatLng(courseList[i].mapY, courseList[i].mapX)
@@ -167,7 +159,7 @@
 		    
 		 // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 		    var content = '<div class="customoverlay">' +
-		        '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
+		        '  <a href="/destination/get.do?num='+courseList[i].num+'">' +
 		        '    <span class="title">'+ courseList[i].title +'</span>' +
 		        '  </a>' +
 		        '</div>';
