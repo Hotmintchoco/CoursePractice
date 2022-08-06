@@ -7,6 +7,7 @@ import com.trip.domain.DesAndCourseVO;
 
 public interface CourseMapper {
 	public List<CourseVO> getList();
+	public List<CourseVO> getCityList(String city);
 	public List<DesAndCourseVO> getDesList(int courseNum);
 	public CourseVO readCourse(int courseNum);
 }

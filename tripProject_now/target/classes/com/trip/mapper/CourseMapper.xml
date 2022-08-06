@@ -10,6 +10,12 @@
 		coursenum > 0
 	</select>
 	
+	<!-- 여행지역 코스 리스트 출력 -->
+	<select id="getCityList" resultType="com.trip.domain.CourseVO">
+		select * from course where 
+		coursenum > 0 and coursecity like '%'|| #{city} ||'%'
+	</select>
+	
 	<!-- 여행지 리스트 출력 -->
 	<select id="getDesList" resultType="com.trip.domain.DesAndCourseVO">
 		select * from des_course where

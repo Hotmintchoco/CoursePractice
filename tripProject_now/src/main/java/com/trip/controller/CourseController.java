@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.trip.domain.CourseVO;
+import com.trip.domain.Criteria;
 import com.trip.domain.DesAndCourseVO;
 import com.trip.domain.DesDataDTO;
 import com.trip.mapper.CourseMapper;
@@ -30,9 +31,13 @@ public class CourseController {
 	private DesDataMapper desMapper;
 	
 	@RequestMapping("list.do")
-	public String list(Model model) {
+	public String list(Model model, String city) {
+		log.info(city);
 		
 		List<CourseVO> list = courseMapper.getList();	//코스 리스트를 list에 담는다.
+		if(city != null) {
+			list = courseMapper.getCityList(city);
+		}
 		int i = 0;
 		
 		for (CourseVO vo : list) {
@@ -59,8 +64,8 @@ public class CourseController {
 	public String page(Model model, int num) {
 		log.info("------- coursePage -------");
 		
-		double numMapX = 0;
-		double numMapY = 0;
+		double numMapX = 0;	//center좌표 설정에 사용할 mapX값
+		double numMapY = 0; //center좌표 설정에 사용할 mapY값
 		
 		CourseVO vo = courseMapper.readCourse(num);
 		

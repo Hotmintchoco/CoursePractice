@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -149,16 +150,16 @@ font-size: 11pt;
 	
 		<div class="box_rightType">
 			<ul>
-				<li style="margin-left: 25px"><button>서울시</button></li>
-				<li><button>경기도</button></li>
-				<li><button>강원도</button></li>
-				<li><button>충청북도</button></li>
-				<li><button>충청남도</button></li>
-				<li><button>경상북도</button></li>
-				<li><button>경상남도</button></li>
-				<li><button>전라북도</button></li>
-				<li><button>전라남도</button></li>
-				<li><button>제주도</button></li>
+				<li style="margin-left: 25px"><button onclick="location.href='/course/list.do?city=서울'">서울시</button></li>
+				<li><button onclick="location.href='/course/list.do?city=경기'">경기도</button></li>
+				<li><button onclick="location.href='/course/list.do?city=강원'">강원도</button></li>
+				<li><button onclick="location.href='/course/list.do?city=충청북도'">충청북도</button></li>
+				<li><button onclick="location.href='/course/list.do?city=충청남도'">충청남도</button></li>
+				<li><button onclick="location.href='/course/list.do?city=경상북도'">경상북도</button></li>
+				<li><button onclick="location.href='/course/list.do?city=경상남도'">경상남도</button></li>
+				<li><button onclick="location.href='/course/list.do?city=전라북도'">전라북도</button></li>
+				<li><button onclick="location.href='/course/list.do?city=전라남도'">전라남도</button></li>
+				<li><button onclick="location.href='/course/list.do?city=제주'">제주도</button></li>
 			</ul>
 		</div>
 		<br>
@@ -174,9 +175,12 @@ font-size: 11pt;
 			</div>
 		</a>
 			<ul class="list-group list-group-flush">
-			<c:forEach items="${course.desList}" var="destination">
+			<c:forEach items="${course.desList}" begin="0" end="2" var="destination">
 				<li class="list-group-item">* ${destination.title}</li>
 			</c:forEach>
+			<c:if test="${fn:length(course.desList) > 3}">
+				<li class="list-group-item" style="text-align: center; height: 20px;">* * *</li>
+			</c:if>
 			</ul>
 		</div>
 		
