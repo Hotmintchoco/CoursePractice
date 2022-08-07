@@ -10,4 +10,5 @@ public interface CourseMapper {
 	public List<CourseVO> getCityList(String city);
 	public List<DesAndCourseVO> getDesList(int courseNum);
 	public CourseVO readCourse(int courseNum);
+	public int likesCourse(int courseNum);
 }

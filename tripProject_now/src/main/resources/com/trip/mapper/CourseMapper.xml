@@ -28,4 +28,11 @@
 		coursenum = #{courseNum}
 	</select>
 	
+	<!-- 코스 좋아요 클릭 -->
+	<update id="likesCourse">
+		update course set
+		courselike = courselike+1
+		where coursenum = #{courseNum}
+	</update>
+	
 </mapper>

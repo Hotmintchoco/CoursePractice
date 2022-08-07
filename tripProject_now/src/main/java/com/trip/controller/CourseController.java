@@ -11,9 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.trip.domain.CourseVO;
-import com.trip.domain.Criteria;
 import com.trip.domain.DesAndCourseVO;
 import com.trip.domain.DesDataDTO;
 import com.trip.mapper.CourseMapper;
@@ -108,4 +108,13 @@ public class CourseController {
 		return new ResponseEntity<>(desList, HttpStatus.OK);
 	}
 	
+	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
+			value = "/{num}", produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> like(@PathVariable("num") int num) {
+		log.info("like메소드 실행..");
+		int check = courseMapper.likesCourse(num);
+		log.info(check);
+		return check == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) :
+									new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

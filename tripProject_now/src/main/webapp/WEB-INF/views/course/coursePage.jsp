@@ -77,10 +77,11 @@
 	     <div id="courseTitle">
 	     	<h1>${course.courseTitle}</h1>
 	     	<p>${course.courseCity}</p>
-	     	<button type="button" class="btn_good">
+	     	<button data-oper='likes' class="btn_good">
 	     		<span class="ico"></span>
 	     		<span class="numLike" id="numLike">${course.courseLike}</span>
 	     	</button>
+	     	
 	     	<hr>
 	     </div>
 	     
@@ -90,6 +91,7 @@
 	     <input id="num" type="hidden" value="${course.courseNum}">
 	     <input id="resultMapX" type="hidden" value="${resultMapX}">
 	     <input id="resultMapY" type="hidden" value="${resultMapY}">
+	     <input id="likes" type="hidden" value="${course.courseLike}">
 	<hr>
 		<div id="desListView">
 		
@@ -97,13 +99,35 @@
 	<jsp:include page="../includes/footer.jsp"></jsp:include>
 	</div>
 	
+	
 	<script>
 	
 	var num = document.getElementById('num').value;
 	var resultMapX = document.getElementById('resultMapX').value;
 	var resultMapY = document.getElementById('resultMapY').value;
+	var likes = document.getElementById('likes').value;
+	
 	
 	var courseService = (function() {
+		
+		function like(num, callback, error) {
+	        console.log("likes...................");
+
+	        $.ajax({
+	            type:"patch",
+	            url:"/course/" + num,
+	            success:function(result, status, xhr){
+	                if(callback){
+	                    callback(result);
+	                }
+	            },
+	            error:function(xhr, status, err){
+	                if(error){
+	                    error(err);
+	                }
+	            }
+	        });
+	    } //end like
 		
 		function desList(num, callback, error){
 			console.log("get...................");
@@ -119,7 +143,8 @@
 	            });
 	    } //end for desList
 	    return {
-	        desList : desList
+	        desList : desList,
+	        like : like
 	    }; // 함수를 객체로 만들어서 리턴
 	})();
 	
@@ -252,7 +277,17 @@
 		var result = totalDistance + "km";
 		document.getElementById("i_result").innerHTML=result;
 	})
-	</script>   
+	
+	$("button[data-oper='likes']").on("click", function(e){
+		courseService.like(num,
+			function(result){
+				alert("좋아요");
+			}
+		)
+		likes += 1;
+		document.getElementById("numLike").innerHTML=likes;
+	});
+	</script>
     
 </body>
 </html>
