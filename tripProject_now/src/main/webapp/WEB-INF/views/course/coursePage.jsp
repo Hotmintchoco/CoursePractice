@@ -49,6 +49,8 @@
 #courseTitle h1 {text-align: center;}
 #courseTitle p {text-align: center;}
 
+#desListView {background-color: gray; height: 750px; margin: 30px 0 30px 0;}
+
 .btn_good .ico {
     background: url(https://cdn.visitkorea.or.kr/resources/images/sub/ico_mpost01_on.png);
     width: 42px; height: 36px;
@@ -89,7 +91,10 @@
 	     <input id="resultMapX" type="hidden" value="${resultMapX}">
 	     <input id="resultMapY" type="hidden" value="${resultMapY}">
 	<hr>
+		<div id="desListView">
 		
+		</div>
+	<jsp:include page="../includes/footer.jsp"></jsp:include>
 	</div>
 	
 	<script>
@@ -249,6 +254,5 @@
 	})
 	</script>   
     
-<jsp:include page="../includes/footer.jsp"></jsp:include>
 </body>
 </html>
