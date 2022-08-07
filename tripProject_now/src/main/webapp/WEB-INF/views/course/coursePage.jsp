@@ -105,9 +105,9 @@
 	var num = document.getElementById('num').value;
 	var resultMapX = document.getElementById('resultMapX').value;
 	var resultMapY = document.getElementById('resultMapY').value;
-	var likes = document.getElementById('likes').value;
+	var likes = parseInt(document.getElementById('likes').value);
 	
-	
+	console.log(likes + " : " + typeof likes);
 	var courseService = (function() {
 		
 		function like(num, callback, error) {
