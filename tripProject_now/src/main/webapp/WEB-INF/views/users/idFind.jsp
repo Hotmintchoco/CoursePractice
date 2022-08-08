@@ -31,7 +31,7 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="../js/login.find.join.js"></script>
+<script type="text/javascript" src="/resources/js/login.find.join.js"></script>
 <style type="text/css">
 @font-face {
 	font-family: 'yg-jalnan';
