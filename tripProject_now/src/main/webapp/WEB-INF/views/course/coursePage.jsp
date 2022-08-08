@@ -49,7 +49,7 @@
 #courseTitle h1 {text-align: center;}
 #courseTitle p {text-align: center;}
 
-#desListView {background-color: gray; height: 750px; margin: 30px 0 30px 0;}
+#desListView {background-color: #D5D5D5; height: 650px; margin: 30px 0 30px 0;}
 
 .btn_good .ico {
     background: url(https://cdn.visitkorea.or.kr/resources/images/sub/ico_mpost01_on.png);
@@ -58,6 +58,11 @@
     test-indent: -9999px;
     }
 .btn_good { width: 75px; height: 55px; border: none; background-color: #FFFFFF; }
+
+.desBoard { width: 250px; height: 450px; background-color: white;
+	display: inline-block; margin: 75px 0 0 60px; border: 1px solid black;
+	position: relative;}
+.card-body {position: absolute;}	
 </style>
      
 </head>
@@ -73,7 +78,7 @@
 	</div>
 	<br><br>
 	<div id="slider">
-	         <!-- title, city 입력 -->
+	     <!-- title, city 입력 -->
 	     <div id="courseTitle">
 	     	<h1>${course.courseTitle}</h1>
 	     	<p>${course.courseCity}</p>
@@ -85,23 +90,38 @@
 	     	<hr>
 	     </div>
 	     
-	        
+	     <!-- 맵 view -->  
 	     <div id="map" style="width:900px;height:500px; margin: 0 auto;"></div>
 	     <p>총 거리</p><span id="i_result"></span>
+	     
 	     <input id="num" type="hidden" value="${course.courseNum}">
 	     <input id="resultMapX" type="hidden" value="${resultMapX}">
 	     <input id="resultMapY" type="hidden" value="${resultMapY}">
 	     <input id="likes" type="hidden" value="${course.courseLike}">
+	
 	<hr>
-		<div id="desListView">
 		
+		<!-- 여행지 리스트 view -->
+		<div id="desListView">
+			<c:forEach items="${course.desList}" var="destination">
+				<div class="card desBoard">
+					<div class="card-body">
+						<h4 class="card-title">${destination.title}</h4>
+						<img class="card-img-top" src="<c:out value="${destination.firstImg}"/>" alt="Card image"
+						style="width: 100%">
+						<p class="card-text">Some example text some example text. John
+							Doe is an architect and engineer</p>
+						<a href="/destination/get.do?num=<c:out value="${destination.num}"/>" class="btn btn-primary stretched-link">여행지 상세보기</a>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
-	<jsp:include page="../includes/footer.jsp"></jsp:include>
+		
+	
 	</div>
 	
 	
 	<script>
-	
 	var num = document.getElementById('num').value;
 	var resultMapX = document.getElementById('resultMapX').value;
 	var resultMapY = document.getElementById('resultMapY').value;
