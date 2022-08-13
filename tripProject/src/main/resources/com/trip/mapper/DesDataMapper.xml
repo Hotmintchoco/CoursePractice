@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trip.mapper.DesDataMapper">
+
+
+	<sql id="criterial">
+		<trim prefix="(" suffix=") and">
+			<foreach collection="typeArr" item="type" separator="or">
+				<if test="type=='T'.toString()">
+					destinationTitle like '%'|| #{keyword} ||'%'
+				</if>
+				<if test="type=='C'.toString()">
+					destinationContent like '%'|| #{keyword} ||'%'
+				</if>
+				<if test="type=='A'.toString()">
+					destinationAddress like '%'|| #{keyword} ||'%'
+				</if>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getList" resultType="com.trip.domain.DesDataDTO">
+		select * from destination where destinationNum>0
+	</select>
+
+	<insert id="insert">
+		insert into destination(destinationNum, destinationTitle, destinationAddress, destinationFirstimg,
+		destinationSecondimg, destinationMapx, destinationMapy, usernum)
+		values(destination_seq.nextval,
+		#{destinationTitle}, #{destinationAddress}, #{destinationFirstImg}, #{destinationSecondImg}, 
+		#{destinationMapX}, #{destinationMapY}, 1)
+	</insert>
+	
+   <select id="read" resultType="com.trip.domain.DesDataDTO">
+      select * from destination
+      where destinationNum=#{destinatioNum}
+   </select>
+	
+	
+		<select id="getListWithPagging"
+		resultType="com.trip.domain.DesDataDTO">
+		<![CDATA[
+			select destinationNum, destinationTitle, destinationFirstImg
+		from(
+			select rownum rn, destinationNum, destinationTitle, destinationFirstImg
+			from destination
+		where	
+		]]>
+		
+		<include refid="criterial"></include>
+		
+		<![CDATA[
+		ROWNUM <= #{pageNum}*#{amount})
+		where
+		rn > (#{pageNum}-1)*#{amount}
+		]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from destination where
+		destinationNum > 0
+	</select>
+	
+		<insert id="register">
+
+		<selectKey keyProperty="destinationNum" order="BEFORE"	resultType="Long">
+			select destination_seq.nextval from dual
+		</selectKey>
+
+		insert into destination(destinationNum, destinationAddress, destinationTitle, destinationFirstImg)
+		values(destination_seq.nextval,
+		#{destinationTitle}, #{destinationAddress}, #{destinationFirstImg})
+	</insert>
+	
+	<update id="update">
+		update destination
+		set destinationTitle = #{destinationTitle},
+		destinationAddress = #{destinationAddress},
+		destinationFirstImg = #{destinationFirstImg}
+		where destinationNum = #{destinationNum}
+	</update>
+	
+	<delete id="delete">
+		delete from destination where destinationNum=#{destinationNum}
+	</delete>
+
+</mapper>

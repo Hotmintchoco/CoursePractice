@@ -1,4 +1,8 @@
 INDEX VERSION 1.131
+C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4074965986.index
+\tripProject\src\main\java
+C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3414681101.index
+\tripProject\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1666243497.index
 \tripProject_now\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\647219011.index
@@ -31,6 +35,8 @@ C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\325
 \ex02\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1288633631.index
 \ex02_1\src\main\java
+C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3241697886.index
+\tripProject\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2923728385.index
 \ex02\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2034382227.index
@@ -55,6 +61,8 @@ C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\214
 \tripProject_now\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1206470954.index
 \ex02\src\main\java
+C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\899136317.index
+\tripProject\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1574780465.index
 \tripProject\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1061738750.index

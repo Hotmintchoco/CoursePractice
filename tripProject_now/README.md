@@ -9,12 +9,12 @@ CREATE TABLE users (
    username varchar2(20) NOT NULL,
    nickname varchar2(20) NOT NULL UNIQUE,
    userpass varchar2(16) NOT NULL,
-   phone char(13) NOT NULL,  / 010-1234-5678 ����
+   phone char(13) NOT NULL,  
    birth char(8) NOT NULL,
-   gender varchar2(8) NOT NULL, / male - ����, female - ����
+   gender varchar2(8) NOT NULL, 
    joindate date default sysdate,
    email varchar2(50) NOT NULL,
-   admin number(1) NOT NULL, / 0 - ������, 1 - �Ϲ�ȸ��
+   admin number(1) NOT NULL, 
    question varchar2(50) NULL,
    answer varchar2(30) NULL
 );
