@@ -4,16 +4,23 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.test.domain.Member;
+import org.springframework.web.client.RestTemplate;
 
 import lombok.extern.log4j.Log4j;
 
@@ -49,9 +56,30 @@ public class HomeController {
 	}
 	
 	@GetMapping("/login.do")
-	public @ResponseBody String kakaoCallback() {
+	public @ResponseBody String kakaoCallback(String code) {
+		
+		RestTemplate rt = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "authorization_code");
+		params.add("client_id", "accbd8d322bc5b0248a5ea6eb444cd28");
+		params.add("redirect_uri", "http://localhost:8081/controller/login.do");
+		params.add("code", code);
+		
+		HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
+				new HttpEntity<>(params ,headers);
+		
+		ResponseEntity<String> response = rt.exchange(
+				"https://kauth.kakao.com/oauth/token ",
+				HttpMethod.POST,
+				kakaoTokenRequest,
+				String.class
+		);
+		
 		log.info("카카오 로그인");
-		return "카카오 인증 완료";
+		return "카카오 토큰 완료_토큰 : " + response;
 	}
 	
 }
