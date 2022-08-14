@@ -134,6 +134,7 @@ public class HomeController {
 			
 			log.info("블로그서버 패스워드 : " + tempPassword);
 			log.info("닉네임 : " + kakaoProfile.getProperties().getNickname());
+			log.info("성별 : " + kakaoProfile.getKakao_account().getGender());
 		return response2.getBody();
 	}
 	
