@@ -1,7 +1,9 @@
 package com.trip.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
+import com.trip.domain.CityVO;
 import com.trip.domain.Criteria;
 import com.trip.domain.DesDataDTO;
 import com.trip.domain.PageDTO;
@@ -37,19 +41,66 @@ public class DestinationController {
 	private DesDataMapper mapper;
 	
 	@GetMapping("list.do")
-	public String list(UserVO vo, Criteria cri, Model model) {
-		int total = mapper.getTotalCount(cri);
-		model.addAttribute("list", mapper.getListWithPagging(cri));
-		model.addAttribute("pageMaker",new PageDTO(cri, total));
-		log.info("total : " + total + ", " + "Admin : " + vo.getAdmin());
-		return "destination/destination3";
+	public String list(UserVO vo, Criteria cri, Model model, String destinationAddress) {
+		log.info("여행지 : " + destinationAddress);
+		List<DesDataDTO> list = mapper.getListWithPagging(cri);	
+		CityVO city = new CityVO();
+		city.setAddress(destinationAddress);
+		log.info("address : " + city.getAddress());
+		if(city.getAddress() != null) {
+			log.info(city.getAddress().equals(""));
+		}
+		city.setPageNum(cri.getPageNum());
+		city.setAmount(cri.getAmount());
 		
+		if (destinationAddress != null) {
+			switch (destinationAddress) {
+			case "경기":
+				city.setCity("인천");
+				list = mapper.getAddressList(city);
+				break;
+			case "충청북":
+				city.setCity("세종");
+				list = mapper.getAddressList(city);
+				break;
+			case "충청남":
+				city.setCity("대전");
+				list = mapper.getAddressList(city);
+				break;
+			case "경상북":
+				city.setCity("대구");
+				list = mapper.getAddressList(city);
+				break;
+			case "경상남":
+				city.setCity("울산 부산");
+				list = mapper.getAddressList(city);
+				break;
+			case "전라남":
+				city.setCity("광주");
+				list = mapper.getAddressList(city);
+				break;
+			default:
+				list = mapper.getAddressList(city);
+			}
+		}
+		int total = mapper.getTotalCount(city);
+		log.info("total :" + total);
+		model.addAttribute("pageMaker",new PageDTO(cri, total, city));
+		total = mapper.searchGetTotal(cri);
+		if(destinationAddress == null || city.getAddress().equals("")) {
+			list = mapper.getListWithPagging(cri);
+			model.addAttribute("pageMaker",new PageDTO(cri, total));
+			log.info("해당 메소드실행");
+		}
+		
+		model.addAttribute("list", list);
+		log.info("total : " + total + ", " + "Admin : " + vo.getAdmin());
+		return "destination/destination";
 	}
-	
+
 	@GetMapping("/register.do")
 	public String register() {
-		return "destination/destinationInsert2";
-	
+		return "destination/destinationInsert";
 	}
 	
 	@PostMapping("/register.do")
@@ -89,7 +140,7 @@ public class DestinationController {
 	
 	@GetMapping("/test.do")
 	public void test() {
-		log.info("test�� �ű�");
+		log.info("test로 옮김");
 		
 	}
 	
@@ -111,13 +162,9 @@ public class DestinationController {
 	   @ResponseBody
 	   public String uploadsummernoteimagefile(@RequestParam("file")MultipartFile multipartFile,HttpServletRequest requset) {
 	      JsonObject jsonobject = new JsonObject();
-	      log.info("ù��°");
 	      String contextroot= new HttpServletRequestWrapper(requset).getRealPath("/");
-	      log.info("�ѹ�°");
 	      String fileroot = contextroot+"resources/upload/";
-	      log.info("�¹�°");
 	      String originalfilename = multipartFile.getOriginalFilename();
-	      log.info("�ݹ�°");
 	      String extension = originalfilename.substring(originalfilename.lastIndexOf("."));
 	      String savedfilename = UUID.randomUUID()+extension;
 	      File targetfile =new File(fileroot+savedfilename);

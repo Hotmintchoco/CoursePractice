@@ -7,7 +7,7 @@
 	<!-- 전체 데이터 출력 -->
 	<select id="getList" resultType="com.trip.domain.UserVO">
 		select * from users where
-		usernum>0
+		usernum>0 order by usernum desc
 	</select>
 
 	<!-- 로그인 회원정보 확인 -->
@@ -52,6 +52,15 @@
 		#{userId}, #{nickName}, #{userName}, #{userPass},
 		#{phone}, #{birth}, #{gender}, #{email}, 1,
 		#{question}, #{answer})
+	</insert>
+	
+   <!-- 카카오 로그인 회원가입 -->
+	<insert id="kakaoInsert">
+		insert into users (usernum, userid, nickname, username,
+		userpass, gender, email, admin)
+		values(users_seq.nextval,
+		#{userId}, #{nickName}, #{userName}, #{userPass},
+		#{gender}, #{email}, 1)
 	</insert>
 	
 	<!-- 회원 탈퇴 -->
