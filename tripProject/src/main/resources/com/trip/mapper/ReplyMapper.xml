@@ -36,12 +36,12 @@
 	<![CDATA[
 		select rno, bno, reply, usernum, replyDate
 		from (
-			select /*+ index(tbl_reply idx_reply) */
+			select /*+ index_desc(board_reply BOARD_REPLY_PK) */
 			rownum rn, rno, bno, reply, usernum, replyDate
 			from board_reply
 			where bno = #{bno}
 			and rno > 0 
-			and rownum <= #{cri.pageNum} * #{cri.amount} order by rno desc
+			and rownum <= #{cri.pageNum} * #{cri.amount}
 		)
 		where rn > (#{cri.pageNum} -1) * #{cri.amount}
 	]]>
