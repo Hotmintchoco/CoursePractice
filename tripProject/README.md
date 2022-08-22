@@ -31,7 +31,7 @@ CREATE TABLE festival (
    CONSTRAINT fk_user_to_festival foreign key(usernum) references users(usernum)
 );
 
--- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(api)
+-- ÃàÁ¦ µ¥ÀÌÅÍ(api)
 create table festivaldata (
     num number(5) not null primary key,
     title varchar2(200),
@@ -56,15 +56,7 @@ CREATE TABLE board (
    usernum number not null,
    CONSTRAINT fk_user_to_board foreign key(usernum) references users(usernum)
 );
-
-create table board_reply(
-    rno number(10, 0),
-    bno number(10, 0) not null,
-    reply varchar2(1000) not null,
-    replyDate date default sysdate,
-    usernum number not null,
-    CONSTRAINT fk_user_to_reply foreign key(usernum) references users(usernum)
-); 
+create index pk_board on board(board_num asc);
 
 create table destination (
     destinationNum number not null primary key,
@@ -79,9 +71,21 @@ create table destination (
     usernum number not null,
     CONSTRAINT fk_user_to_destination foreign key(usernum) references users(usernum)
 );
---ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+--¿ª¼øÀ¸·Î ¸®½ºÆ® Á¶È¸¸¦ À§ÇÑ ÀÎµ¦½º »ý¼º
 create index indexNum on destination(destinationNum desc);
 
+-- À½½ÄÁ¡/È£ÅÚ µ¥ÀÌÅÍ
+create table destination_impl (
+    num number(5) not null primary key,
+    title varchar2(200),
+    address varchar2(200),
+    firstimg varchar2(500),
+    mapx varchar2(50),
+    mapy varchar2(50),
+    mlevel number(5),
+    tel varchar2(150),
+    type number     -- È£ÅÚ 1, À½½ÄÁ¡ 2
+);
 
 
 CREATE TABLE course (
@@ -93,15 +97,27 @@ CREATE TABLE course (
    coursecity varchar2(50) not null
 );
 
--- ï¿½Ú½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+-- ÄÚ½º ¾È¿¡ ¿©ÇàÁö ¸ñ·Ï
 create table des_course(
     pathnum number not null,
     destinationnum number not null,
-    --pk ï¿½Ü·ï¿½Å°
+    --pk ¿Ü·¡Å°
     CONSTRAINT fk_destination_to foreign key(destinationnum) 	references destination(destinationNum),
     coursenum number not null,
     CONSTRAINT fk_course_to foreign key(coursenum) references course(coursenum)
 );
+
+-- 
+create table board_reply(
+    rno number(10, 0) primary key,
+    bno number(10, 0) not null,
+    reply varchar2(1000) not null,
+    replyDate date default sysdate,
+    usernum number not null,
+    CONSTRAINT fk_user_to_reply 
+    foreign key(usernum) references users(usernum)
+);
+create index BOARD_REPLY_PK on board_reply(rno asc);
 
 -- 
 create sequence users_seq
@@ -116,19 +132,16 @@ START with 1 INCREMENT by 1 MINVALUE 1;
 create sequence board_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
 -- 
-create SEQUENCE seq_reply 
-START with 1 INCREMENT by 1 MINVALUE 1;
--- 
 create sequence destination_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
 -- 
 create SEQUENCE desdata_seq 
 START with 1 INCREMENT by 1 MINVALUE 1;
---
-create sequence des_comment_seq
-START with 1 INCREMENT by 1 MINVALUE 1;
 -- 
 create sequence course_seq
+START with 1 INCREMENT by 1 MINVALUE 1;
+--
+create sequence destination_impl_seq
 START with 1 INCREMENT by 1 MINVALUE 1;
 
 commit;

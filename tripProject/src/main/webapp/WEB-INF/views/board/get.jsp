@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>코스추천</title>
+    <title>자유게시판</title>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -35,7 +35,7 @@
  ul > li > a {color: #212121;}
  #slider {width: 1000px; height: 1000px; margin: 0 auto;}
 	table {width:800px; margin:10px auto 0;}
-	section {width: 1000px; height: 750px; background-color: #D5D5D5; margin:0 auto;}
+	section {width: 1000px; height: 1200px; background-color: #D5D5D5; margin:0 auto; margin-bottom: 25px;}
 	section > h1 {text-align: center; line-height: 100px;}
 	table, th, td  { border:1px solid #666; }
 	th, td { height: 50px; text-align: center; }
@@ -62,7 +62,7 @@
 	<br><br>
 	<div id="slider">
 		<section>
-			<h1>내 정보 조회</h1>
+			<h1>게시글</h1>
 			<table>
 				<tr>
 					<td>글 번호</td>
@@ -75,7 +75,7 @@
 				<tr>
 					<td>내용</td>
 					<td>
-					<textarea rows="10" cols="70"  name="content"  readonly="readonly">${board.board_content}</textarea>
+					${board.board_content}
 					</td>
 				</tr>
 				<tr>
@@ -85,8 +85,12 @@
 				</tr>
 			</table>
 			<div id="buttons">
-				<button data-oper='modify' class="btn btn-default">수정</button>
-	            <button data-oper='remove' class="btn btn-info">삭제</button>
+				<c:choose>
+					<c:when test="${board.usernum == user.userNum || user.admin == 0}">
+						<button data-oper='modify' class="btn btn-default">수정</button>
+		            	<button data-oper='remove' class="btn btn-info">삭제</button>
+					</c:when>
+				</c:choose>
 			</div>
 		</section>
 		
@@ -166,7 +170,6 @@
 <script type="text/javascript" src="/resources/js/reply.js"></script> 
 
 <script>
-
 $(document).ready(function(){
 	var usernum = document.frm.usernum.value;
 	var num = document.frm.num.value;
@@ -372,15 +375,11 @@ $(document).ready(function(){
            showList(pageNum);
       });    //end replyPageFooter
       
-
 	var operForm = $("#operForm");
-
 	console.log(num);
-
 	$("button[data-oper='modify']").on("click", function(e) {
 		operForm.attr("action", "/board/modify.do?" + num).submit();
 	});
-
 	$("button[data-oper='remove']").on("click", function(e) {
 		operForm.attr("action", "/board/remove.do?" + num);
 		operForm.submit();

@@ -25,12 +25,12 @@ import com.trip.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/* ìž‘ì—… 	  URL         HTTPì „ì†¡ë°©ì‹
- * ë“±ë¡ : /replies/new : POST
- * ì¡°íšŒ : /replies/:rno : GET
- * ì‚­ì œ : /replies/:rno : DELETE
- * ìˆ˜ì • : /replies/:rno : PUT or PATCH
- * íŽ˜ì´ì§€ : /replies/pages/:bno/:page : GET
+/* ÀÛ¾÷ 	  URL         HTTPÀü¼Û¹æ½Ä
+ * µî·Ï : /replies/new : POST
+ * Á¶È¸ : /replies/:rno : GET
+ * »èÁ¦ : /replies/:rno : DELETE
+ * ¼öÁ¤ : /replies/:rno : PUT or PATCH
+ * ÆäÀÌÁö : /replies/pages/:bno/:page : GET
  */
 
 @RestController
@@ -41,9 +41,9 @@ public class ReplyController {
 	private ReplyService service;
 	private UserService userService;
 	
-	//í´ë¼ì´ì–¸íŠ¸ì—ì„œ ì„œë²„ì „ì†¡  json, ì„œë²„ì—ì„œ í´ë¼ì´ì–¸íŠ¸ String
-	//{ì†ì„±:ê°’, ì†ì„±:ê°’} --> @RequestBody
-	//{bno:ê°’, reply:ê°’, replyer:ê°’}
+	//Å¬¶óÀÌ¾ðÆ®¿¡¼­ ¼­¹öÀü¼Û  json, ¼­¹ö¿¡¼­ Å¬¶óÀÌ¾ðÆ® String
+	//{¼Ó¼º:°ª, ¼Ó¼º:°ª} --> @RequestBody
+	//{bno:°ª, reply:°ª, replyer:°ª}
 	
 	@PostMapping(value = "/new", consumes="application/json",
 			produces = {MediaType.TEXT_PLAIN_VALUE})
@@ -105,7 +105,7 @@ public class ReplyController {
 	@GetMapping(value = "/user/{usernum}", produces = {MediaType.APPLICATION_JSON_VALUE,
 			 MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<UserVO> getUser(@PathVariable("usernum") int usernum) {
-		log.info("------- ìœ ì €ì ‘ê·¼ -------");
+		log.info("------- À¯ÀúÁ¢±Ù -------");
 		return new ResponseEntity<UserVO>(userService.get(usernum), HttpStatus.OK);
 	}
 }

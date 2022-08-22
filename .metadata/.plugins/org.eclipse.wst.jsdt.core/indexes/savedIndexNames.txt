@@ -1,21 +1,5 @@
 INDEX VERSION 1.4+C:\java\CoursePractice\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2773527832.index
-1594213142.index
-1201766795.index
-2034382227.index
-1574780465.index
-899136317.index
-2556734173.index
-550680352.index
-3241697886.index
-1782991341.index
-3742446933.index
 1216147199.index
-325372375.index
-3118581613.index
-4074965986.index
+1201766795.index
 3228091013.index
-642834584.index
-2787325451.index
-2273948847.index
-3414681101.index
+899136317.index
