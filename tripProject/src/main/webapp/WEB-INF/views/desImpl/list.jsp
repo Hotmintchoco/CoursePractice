@@ -154,18 +154,16 @@ h1 { text-align: center; }
 				<!-- 페이지 처리 End -->
 				<!-- 검색조건 start -->
 					<form id = "SearchForm" action = "/desImpl/list.do" method="get" >
-						<select name='type'>
+						<select>
 							<option value="" <c:out value="${pageMaker.cri.type==null?'selected':''}"/>>검색</option>
-							<option value="T" <c:out value="${pageMaker.cri.type eq T?'selected':''}"/> >제목</option>
 							<option>지역</option>
-
 						</select>
 
 					<input type="text" name="desCity"  >	
 					<input type ="hidden" name="pageNum"value='${pageMaker.cri.pageNum}'/>	
 					<input type ="hidden" name="amount"value='${pageMaker.cri.amount}'/>
 
-					<button type="button" class="btn btn-outline-info">Search</button>	
+					<input type="submit" class="btn btn-outline-info" value="Search">
 
 					</form>
 
