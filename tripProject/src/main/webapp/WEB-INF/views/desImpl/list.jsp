@@ -80,16 +80,16 @@ h1 { text-align: center; }
 		<!-- 여기에 내용 넣으세요 -->
 <div id="menu" class="card text-center" style="border-radius: 30px;">
   <div class="card-header" style="border-radius: 30px;" >
-    <button onclick="location.href='/desImpl/list.do?desCity=서울'" type="button" class="btn btn-light fw-bolder">서울시</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=경기'" type="button" class="btn btn-light">경기도</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=강원'" type="button" class="btn btn-light">강원도</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=충청북'" type="button" class="btn btn-light">충청북도</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=충청남'" type="button" class="btn btn-light">충청남도</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=경상북'" type="button" class="btn btn-light">경상북도</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=경상남'" type="button" class="btn btn-light">경상남도</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=전라북'" type="button" class="btn btn-light">전라북도</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=전라남'" type="button" class="btn btn-light">전라남도</button>
-    <button onclick="location.href='/desImpl/list.do?desCity=제주'" type="button" class="btn btn-light">제주도</button>
+  	<a href="서울"><button type="button" class="btn btn-light fw-bolder">서울시</button></a>
+  	<a href="경기"><button type="button" class="btn btn-light fw-bolder">경기도</button></a>
+  	<a href="강원"><button type="button" class="btn btn-light fw-bolder">강원도</button></a>
+  	<a href="충청북"><button type="button" class="btn btn-light fw-bolder">충청북도</button></a>
+  	<a href="충청남"><button type="button" class="btn btn-light fw-bolder">충청남도</button></a>
+  	<a href="경상북"><button type="button" class="btn btn-light fw-bolder">경상북도</button></a>
+  	<a href="경상남"><button type="button" class="btn btn-light fw-bolder">경상남도</button></a>
+  	<a href="전라북"><button type="button" class="btn btn-light fw-bolder">전라북도</button></a>
+  	<a href="전라남"><button type="button" class="btn btn-light fw-bolder">전라남도</button></a>
+  	<a href="제주"><button type="button" class="btn btn-light fw-bolder">제주도</button></a>
   </div>
   
   <div id="selectType" style="border-radius: 30px;">
@@ -184,6 +184,13 @@ h1 { text-align: center; }
  
 	var actionForm = $("#actionForm");
 	
+	
+	$(".card-header a").on("click", function(e){
+		 e.preventDefault();
+		console.log('click');
+		actionForm.find("input[name='desCity']").val($(this).attr("href"));
+		actionForm.submit(); 
+	});
 	
 	$("#selectType a").on("click", function(e){
 		 e.preventDefault();
