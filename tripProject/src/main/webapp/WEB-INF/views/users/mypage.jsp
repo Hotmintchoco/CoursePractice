@@ -107,7 +107,9 @@
 			</div>
 		</section>
 		
-		<form id="operForm" action="../board/modify.do" method="get"></form>
+		<form id="operForm" action="../board/modify.do" method="get">
+			<input type="hidden" name="userNum" value='<c:out value="${user.userNum}"/>'>
+		</form>
 	</div>
 
 <script>
@@ -118,8 +120,12 @@
 	});
 	
 	$("button[data-oper='remove']").on("click", function(e){
-		operForm.attr("action", "../users/withdraw.do");
-		operForm.submit();
+		let result = confirm("회원 탈퇴하시겠습니까?");
+		
+		if(result){
+			operForm.attr("action", "../users/withdraw.do");
+			operForm.submit();
+		}
 	});
 </script>	
 </body>
