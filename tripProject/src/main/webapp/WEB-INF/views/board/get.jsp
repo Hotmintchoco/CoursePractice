@@ -62,7 +62,7 @@
 	<br><br>
 	<div id="slider">
 		<section>
-			<h1>게시글</h1>
+			<h1>${board.board_title}</h1>
 			<table>
 				<tr>
 					<td>글 번호</td>
@@ -202,12 +202,15 @@ $(document).ready(function(){
    
    modalRemoveBtn.on("click", function(){
       let rno = modal.data("rno");
-     
-      replyService.remove(rno, function(result){
-         alert("result : " + result);
-         modal.modal("hide");
-         showList(pageNum);
-      });
+      let result = confirm("댓글을 삭제하시겠습니까?");
+      
+      if(result){
+	      replyService.remove(rno, function(result){
+	         alert("result : " + result);
+	         modal.modal("hide");
+	         showList(pageNum);
+	      });
+      }
    }); //삭제하기
    
    modalModBtn.on("click", function(e){
@@ -381,8 +384,12 @@ $(document).ready(function(){
 		operForm.attr("action", "/board/modify.do?" + num).submit();
 	});
 	$("button[data-oper='remove']").on("click", function(e) {
-		operForm.attr("action", "/board/remove.do?" + num);
-		operForm.submit();
+		let result = confirm("글을 삭제하시겠습니까?");
+		
+		if(result){
+			operForm.attr("action", "/board/remove.do?" + num);
+			operForm.submit();
+		}
 	});
 });
 </script>	
