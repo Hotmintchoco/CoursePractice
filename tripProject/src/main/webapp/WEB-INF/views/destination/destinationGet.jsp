@@ -170,7 +170,13 @@ font-size: 11pt;
 					<input type="hidden" name="type" value='<c:out value="${cri.type}"/>'>
 					<input type="hidden" name="keyword"	value='<c:out value="${cri.keyword}"/>'>
 				</form>
-			</div>
+
+			<iframe width="853" height="480"
+				src="https://www.youtube.com/embed/8u0WUpGrjXY"
+				title="서비스업에서는 JPA, SI에서는 MyBatis를 하는데" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe>
+		</div>
 <script>
 	var operForm=$("#operForm");
 	
