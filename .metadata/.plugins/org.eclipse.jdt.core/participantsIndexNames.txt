@@ -47,6 +47,8 @@ C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\278
 \tripProject\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3414681101.index
 \tripProject\src\main\java
+C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\598919781.index
+\hrdddd\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1288633631.index
 \ex02_1\src\main\java
 C:\java\CoursePractice\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3118581613.index
